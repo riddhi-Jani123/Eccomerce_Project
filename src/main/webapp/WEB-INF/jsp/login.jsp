@@ -1,5 +1,4 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -278,6 +277,12 @@
             <input type="email" name="email" placeholder="Email" />
             <input type="password" name="password" placeholder="Password" />
             <button>Sign Up</button>
+            <c:if test="${not empty userAlreadyExist}">
+                <div class="error-message">
+                    <br>
+                    <h3 style="color:red;">${userAlreadyExist}</h3>
+                </div>
+            </c:if>
         </form>
     </div>
     <div class="form-container sign-in-container">
@@ -293,11 +298,13 @@
             <input type="password" name="password" placeholder="Password" />
             <a href="#">Forgot your password?</a>
             <button>Sign In</button>
-            <div th:if="${errorMessage}" class="error-message">
-                 <br><h3 style="color:red;" th:text=${errorMessage}/>
-            </div>
+           <c:if test="${not empty errorMessage}">
+               <div class="error-message">
+                   <br>
+                   <h3 style="color:red;">${errorMessage}</h3>
+               </div>
+           </c:if>
         </form>
-
     </div>
     <div class="overlay-container">
         <div class="overlay">

@@ -9,6 +9,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -28,5 +31,21 @@ public class SecurityConfig {
                 })
                 .oauth2Login(oauth2Login -> oauth2Login.loginPage("/login").successHandler(customSuccessHandler))
                 .build();
+    }
+
+    public static String encode(String password) {
+        try {
+
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = md.digest(password.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashBytes) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.getMessage();
+            return null;
+        }
     }
 }

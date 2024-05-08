@@ -2,8 +2,9 @@ package com.inexture.ecommerce.controller;
 
 import com.inexture.ecommerce.dto.UserDTO;
 import com.inexture.ecommerce.model.User;
-import com.inexture.ecommerce.repository.UserRepository;
+import com.inexture.ecommerce.service.EmailService;
 import com.inexture.ecommerce.service.UserServiceImpl;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,14 +13,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.IOException;
+
 @Controller
 public class LoginController {
 
     @Autowired
-    UserServiceImpl userService;
+    private EmailService emailService;
 
     @Autowired
-    UserRepository userRepository;
+    UserServiceImpl userService;
 
     @GetMapping(value = {"/","/index"})
     public String home(){
@@ -33,7 +36,7 @@ public class LoginController {
 
     @GetMapping("/loginUser")
     public String loginUser(@RequestParam("email") String email,@RequestParam("password") String password, Model model){
-        User user = userRepository.getUserByEmailAndPassword(email, password);
+        User user = userService.getByEmailAndPassword(email, password);
         if (user != null) {
             return ("index");
         }
@@ -42,8 +45,18 @@ public class LoginController {
     }
 
     @PostMapping("/registerUser")
-    public String registerUser(@ModelAttribute UserDTO userDTO){
-        userService.addUser(userDTO);
-        return "index";
+    public String registerUser(@ModelAttribute UserDTO userDTO, Model model){
+        User user = userService.getByEmail(userDTO.getEmail());
+        if (user == null ) {
+            userService.addUser(userDTO);
+            try {
+                emailService.sendSimpleMessage(userDTO.getEmail(), userDTO.getFirstName());
+            } catch (IOException | MessagingException e) {
+                throw new RuntimeException(e);
+            }
+            return "index";
+        }
+        model.addAttribute("userAlreadyExist","User already exist");
+        return "login";
     }
 }

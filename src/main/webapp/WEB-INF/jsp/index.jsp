@@ -120,49 +120,13 @@
                     <ul class="menu-list">
 
                       <li class="menu-item has-sub">
-                        <a href="index" class="item-anchor active d-flex align-item-center" data-effect="Home">Home<i class="icon icon-chevron-down"></i></a>
-                        <ul class="submenu">
-                          <li><a href="index" class="item-anchor active">Home</a></li>
-                          <li><a href="home2" class="item-anchor">Home v2<span class="text-primary"> (PRO)</span></a></li>
-                        </ul>
+                        <a href="index" class="item-anchor active d-flex align-item-center" data-effect="Home">Home</a>
                       </li>
 
                       <li><a href="about" class="item-anchor" data-effect="About">About</a></li>
 
                       <li class="menu-item has-sub">
-                        <a href="shop" class="item-anchor d-flex align-item-center" data-effect="Shop">Shop<i class="icon icon-chevron-down"></i></a>
-                        <ul class="submenu">
-                          <li><a href="shop" class="item-anchor">Shop</a></li>
-                          <li><a href="shop-slider" class="item-anchor">Shop slider<span class="text-primary"> (PRO)</span></a></li>
-                          <li><a href="shop-grid" class="item-anchor">Shop grid<span class="text-primary"> (PRO)</span></a></li>
-                          <li><a href="shop-list" class="item-anchor">Shop list<span class="text-primary"> (PRO)</span></a></li>
-                          <li><a href="single-product" class="item-anchor">Single product<span class="text-primary"> (PRO)</span></a></li>
-                          <li><a href="cart" class="item-anchor">Cart<span class="text-primary"> (PRO)</span></a></li>
-                          <li><a href="wishlist" class="item-anchor">Wishlist<span class="text-primary"> (PRO)</span></a></li>
-                          <li><a href="checkout" class="item-anchor">Checkout<span class="text-primary"> (PRO)</span></a></li>
-                        </ul>
-                      </li>
-
-                      <li class="menu-item has-sub">
-                        <a href="#" class="item-anchor d-flex align-item-center" data-effect="Pages">Pages<i class="icon icon-chevron-down"></i></a>
-                        <ul class="submenu">
-                          <li><a href="coming-soon" class="item-anchor">Coming soon<span class="text-primary"> (PRO)</span></a></li>
-                          <li><a href="login" class="item-anchor">Login<span class="text-primary"> (PRO)</span></a></li>
-                          <li><a href="faqs" class="item-anchor">FAQs<span class="text-primary"> (PRO)</span></a></li>
-                          <li><a href="styles" class="item-anchor">Styles</a></li>
-                          <li><a href="thank-you" class="item-anchor">Thankyou</a></li>
-                          <li><a href="error" class="item-anchor">Error page<span class="text-primary"> (PRO)</span></a></li>
-                        </ul>
-                      </li>
-
-                      <li class="menu-item has-sub">
-                        <a href="blog" class="item-anchor d-flex align-item-center" data-effect="Blog">Blog<i class="icon icon-chevron-down"></i></a>
-                        <ul class="submenu">
-                          <li><a href="blog" class="item-anchor">Blog</a></li>
-                          <li><a href="blog-sidebar" class="item-anchor">Blog with sidebar<span class="text-primary"> (PRO)</span></a></li>
-                          <li><a href="blog-masonry" class="item-anchor">Blog masonry<span class="text-primary"> (PRO)</span></a></li>
-                          <li><a href="single-post" class="item-anchor">Single post</a></li>
-                        </ul>
+                        <a href="shop" class="item-anchor d-flex align-item-center" data-effect="Shop">Products</a>
                       </li>
 
                       <li><a href="contact" class="item-anchor" data-effect="Contact">Contact</a></li>

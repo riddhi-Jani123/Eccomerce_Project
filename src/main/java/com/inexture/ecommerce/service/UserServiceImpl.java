@@ -5,13 +5,13 @@ import com.inexture.ecommerce.model.User;
 import com.inexture.ecommerce.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static com.inexture.ecommerce.config.SecurityConfig.encode;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,13 +20,10 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
 
     public UserDTO addUser(UserDTO userDTO){
-        User user = userRepository.getUserByEmail(userDTO.getEmail());
-        if (user == null){
-            userDTO.setPassword(passwordEncoder().encode(userDTO.getPassword()));
-            user = userRepository.save(convertToEntity(userDTO));
+            userDTO.setPassword(encode(userDTO.getPassword()));
+            User user = userRepository.save(convertToEntity(userDTO));
             userDTO.setUserId(user.getUserId());
-        }
-        return updateUser(userDTO, user.getUserId());
+            return userDTO;
     }
 
     @Override
@@ -41,10 +38,18 @@ public class UserServiceImpl implements UserService {
         return userList.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
+    public User getByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
+
+    public User getByEmailAndPassword(String email, String password){
+        return userRepository.findByEmailAndPassword(email, encode(password));
+    }
+
     @Override
     public UserDTO updateUser(UserDTO userDTO, long id) {
         userDTO.setUserId(id);
-        userRepository.save(convertToEntity(userDTO));
+        User user = userRepository.save(convertToEntity(userDTO));
         return userDTO;
     }
 
@@ -65,8 +70,4 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    @Bean(name="encoder")
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 }

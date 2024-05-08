@@ -1,5 +1,6 @@
 package com.inexture.ecommerce.dto;
 
+import com.inexture.ecommerce.constant.ProviderEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,5 +17,5 @@ public class UserDTO {
     private String firstName;
     private String lastName;
     private String mobileNumber;
-    private String provider;
+    private String provider =  ProviderEnum.IN_HOUSE.getValue();
 }
