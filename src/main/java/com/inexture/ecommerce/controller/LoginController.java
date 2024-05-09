@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 
@@ -40,8 +39,8 @@ public class LoginController {
     }
 
     @GetMapping("/loginUser")
-    public String loginUser(@RequestParam("email") String email,@RequestParam("password") String password, Model model){
-        User user = userService.getByEmailAndPassword(email, password);
+    public String loginUser(@ModelAttribute UserDTO userDTO, Model model){
+        User user = userService.getByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword());
         if (user != null) {
             return ("index");
         }
@@ -52,16 +51,22 @@ public class LoginController {
     @PostMapping("/registerUser")
     public String registerUser(@ModelAttribute UserDTO userDTO, Model model){
         User user = userService.getByEmail(userDTO.getEmail());
-        if (user == null ) {
-            userService.addUser(userDTO);
-            try {
-                emailService.sendSimpleMessage(userDTO.getEmail(), userDTO.getFirstName());
-            } catch (IOException | MessagingException e) {
-                throw new RuntimeException(e);
-            }
-            return "index";
+        if (user!=null) {
+            model.addAttribute("emailAlreadyExist","email already exist");
+            return "register";
         }
-        model.addAttribute("userAlreadyExist","User already exist");
-        return "register";
+        user = userService.getByUsername(userDTO.getUsername());
+        if (user!=null) {
+            model.addAttribute("userNameAlreadyExist","username already exist");
+            return "register";
+        }
+        userService.addUser(userDTO);
+        try {
+            emailService.sendSimpleMessage(userDTO.getEmail(), userDTO.getFirstName());
+        } catch (IOException | MessagingException e) {
+            throw new RuntimeException(e);
+        }
+        return "index";
+
     }
 }

@@ -200,28 +200,34 @@
 
 
     <div class="form-container sign-up-container">
-        <form action="registerUser" method="post">
-            <h1>Create Account</h1>
-            <div class="social-container">
-                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                <a href="/oauth2/authorization/google" class="social"><i class="fab fa-google-plus-g"></i></a>
-                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-            <span>or use your email for registration</span>
-            <input type="text" name="firstName" placeholder="First Name" />
-            <input type="text" name="lastName" placeholder="Last Name" />
-            <input type="text" name="username" placeholder="UserName" />
-            <input type="text" name="mobileNumber" placeholder="Mobile Number" />
-            <input type="email" name="email" placeholder="Email" />
-            <input type="password" name="password" placeholder="Password" />
-            <button class="signup-btn">Sign Up</button>
-            <c:if test="${not empty userAlreadyExist}">
-                            <div class="error-message">
-                                <br>
-                                <h3 style="color:red;">${userAlreadyExist}</h3>
-                            </div>
-                        </c:if>
-        </form>
+       <form action="registerUser" method="post">
+           <h1>Create Account</h1>
+           <div class="social-container">
+               <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+               <a href="/oauth2/authorization/google" class="social"><i class="fab fa-google-plus-g"></i></a>
+               <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+           </div>
+           <span>or use your email for registration</span>
+           <input type="text" name="firstName" placeholder="First Name" required />
+           <input type="text" name="lastName" placeholder="Last Name" required />
+           <input type="text" name="username" placeholder="Username" required autocomplete="off"/>
+           <input type="text" name="mobileNumber" placeholder="Mobile Number" pattern="[0-9]{10}" title="Mobile number must be 10 digits" required />
+           <input type="email" name="email" placeholder="Email" required />
+           <input type="password" name="password" placeholder="Password" required />
+           <button class="signup-btn">Sign Up</button>
+           <c:if test="${not empty emailAlreadyExist}">
+               <div class="error-message">
+                   <br>
+                   <h3 style="color:red;">${emailAlreadyExist}</h3>
+               </div>
+           </c:if>
+           <c:if test="${not empty userNameAlreadyExist}">
+                  <div class="error-message">
+                      <br>
+                      <h3 style="color:red;">${userNameAlreadyExist}</h3>
+                  </div>
+           </c:if>
+       </form>
     </div>
 
     <div class="overlay-container">
@@ -233,9 +239,6 @@
             </div>
         </div>
     </div>
-
-
-
 </div>
 
 <footer>

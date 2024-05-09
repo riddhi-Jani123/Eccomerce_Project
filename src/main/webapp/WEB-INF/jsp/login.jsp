@@ -202,6 +202,11 @@
             width: 40px;
         }
 
+         .required::after {
+                content: "*";
+                color: red;
+         }
+
         footer {
             background-color: #222;
             color: #fff;
@@ -232,26 +237,25 @@
 
 <div class="container" id="container">
     <div class="form-container sign-in-container">
-        <form action="loginUser" >
-            <h1>Sign in</h1>
-            <div class="social-container">
-                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                <a href="/oauth2/authorization/google" class="social"><i class="fab fa-google-plus-g"></i></a>
-                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-            <span>or use your account</span>
-            <input type="email" name="email" placeholder="Email" />
-            <input type="password" name="password" placeholder="Password" />
-            <a href="#">Forgot your password?</a>
-            <button>Sign In</button>
-            <c:if test="${not empty errorMessage}">
-                           <div class="error-message">
-                               <br>
-                               <h3 style="color:red;">${errorMessage}</h3>
-                           </div>
-             </c:if>
-        </form>
-
+       <form action="loginUser">
+           <h1>Sign in</h1>
+           <div class="social-container">
+               <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+               <a href="/oauth2/authorization/google" class="social"><i class="fab fa-google-plus-g"></i></a>
+               <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+           </div>
+           <span>or use your account</span>
+           <input type="email" name="email" id="email" placeholder="Email" required />
+           <input type="password" name="password" id="password" placeholder="Password" required />
+           <a href="#">Forgot your password?</a>
+           <button>Sign In</button>
+           <c:if test="${not empty errorMessage}">
+               <div class="error-message">
+                   <br>
+                   <h3 style="color:red;">${errorMessage}</h3>
+               </div>
+           </c:if>
+       </form>
     </div>
     <div class="overlay-container">
         <div class="overlay">

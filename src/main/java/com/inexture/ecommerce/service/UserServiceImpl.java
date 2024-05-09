@@ -42,6 +42,10 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
+    public User getByUsername(String username){
+        return userRepository.findByUsername(username);
+    }
+
     public User getByEmailAndPassword(String email, String password){
         return userRepository.findByEmailAndPassword(email, encode(password));
     }
