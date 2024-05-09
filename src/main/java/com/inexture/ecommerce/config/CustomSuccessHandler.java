@@ -4,7 +4,6 @@ import com.inexture.ecommerce.constant.Constants;
 import com.inexture.ecommerce.dto.UserDTO;
 import com.inexture.ecommerce.repository.UserRepository;
 import com.inexture.ecommerce.service.UserService;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-                                        Authentication authentication) throws IOException, ServletException {
+                                        Authentication authentication) throws IOException {
 
         String redirectUrl = null;
         if(authentication.getPrincipal() instanceof DefaultOAuth2User userDetails) {
@@ -39,9 +38,13 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
                 user.setLastName(userDetails.getAttribute(Constants.FAMILY_NAME));
                 user.setUsername(userDetails.getAttribute(Constants.NAME));
                 user.setProvider(((OAuth2AuthenticationToken) authentication).getAuthorizedClientRegistrationId());
-                userService.addUser(user);
+                request.getSession().setAttribute("user",user);
+                redirectUrl = "/password";
             }
-        }  redirectUrl = "/index";
+            else {
+                redirectUrl = "/index";
+            }
+        }
         new DefaultRedirectStrategy().sendRedirect(request, response, redirectUrl);
     }
 

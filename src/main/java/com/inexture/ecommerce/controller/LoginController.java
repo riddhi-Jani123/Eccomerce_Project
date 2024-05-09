@@ -5,12 +5,14 @@ import com.inexture.ecommerce.model.User;
 import com.inexture.ecommerce.service.EmailService;
 import com.inexture.ecommerce.service.UserServiceImpl;
 import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 
@@ -38,7 +40,12 @@ public class LoginController {
         return "register";
     }
 
-    @GetMapping("/loginUser")
+    @GetMapping("/password")
+    public String password(){
+        return "setPassword";
+    }
+
+    @PostMapping("/loginUser")
     public String loginUser(@ModelAttribute UserDTO userDTO, Model model){
         User user = userService.getByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword());
         if (user != null) {
@@ -68,5 +75,13 @@ public class LoginController {
         }
         return "index";
 
+    }
+
+    @PostMapping("/setPassword")
+    public String setPassword(@RequestParam("password") String password, HttpServletRequest httpServletRequest) {
+        UserDTO userDTO = (UserDTO) httpServletRequest.getSession().getAttribute("user");
+        userDTO.setPassword(password);
+        userService.addUser(userDTO);
+        return "index";
     }
 }
