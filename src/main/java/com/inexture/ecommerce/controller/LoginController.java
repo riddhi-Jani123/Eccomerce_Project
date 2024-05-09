@@ -34,6 +34,11 @@ public class LoginController {
         return "login";
     }
 
+    @GetMapping("/register")
+    public String register(){
+        return "register";
+    }
+
     @GetMapping("/loginUser")
     public String loginUser(@RequestParam("email") String email,@RequestParam("password") String password, Model model){
         User user = userService.getByEmailAndPassword(email, password);
@@ -57,6 +62,6 @@ public class LoginController {
             return "index";
         }
         model.addAttribute("userAlreadyExist","User already exist");
-        return "login";
+        return "register";
     }
 }
