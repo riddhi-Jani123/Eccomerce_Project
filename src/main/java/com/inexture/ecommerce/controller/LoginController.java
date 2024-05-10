@@ -7,12 +7,11 @@ import com.inexture.ecommerce.service.UserServiceImpl;
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -35,6 +34,8 @@ public class LoginController {
         return "login";
     }
 
+
+
     @GetMapping("/register")
     public String register(){
         return "register";
@@ -45,14 +46,25 @@ public class LoginController {
         return "setPassword";
     }
 
+//    @PostMapping("/loginUser")
+//    public ResponseEntity<?> loginUser(@ModelAttribute UserDTO userDTO){
+//        User user = userService.getByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword());
+//        if (user != null) {
+//            return ResponseEntity.ok().build();
+//        }
+//        return ResponseEntity.badRequest().body("{\"errorMessage\": \"Please enter correct email and password\"}");
+//    }
+
     @PostMapping("/loginUser")
     public String loginUser(@ModelAttribute UserDTO userDTO, Model model){
         User user = userService.getByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword());
         if (user != null) {
             return ("index");
+        }else {
+            String error = "Please enter correct email and password";
+            model.addAttribute("errorMessage", error);
+            return "error";
         }
-        model.addAttribute("errorMessage", "Please enter correct email and password");
-        return "login";
     }
 
     @PostMapping("/registerUser")

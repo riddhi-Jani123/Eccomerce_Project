@@ -91,9 +91,10 @@
         input {
             background-color: #eee;
             border: none;
-            padding: 12px 15px;
-            margin: 8px 0;
+            padding: 15px 15px;
+            margin: 10px 0;
             width: 100%;
+            border-radius: 5px;
         }
 
         .container {
@@ -201,6 +202,18 @@
             height: 40px;
             width: 40px;
         }
+        .signup-btn{
+            background-color: transparent;
+            border-radius: 20px;
+            border: 1px solid #FFFFFF;
+            color: #FFFFFF;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 12px 45px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: transform 80ms ease-in;
+        }
 
          .required::after {
                 content: "*";
@@ -262,7 +275,7 @@
             <div class="overlay-panel overlay-right">
                 <h1>Hello, Friend!</h1>
                 <p>Enter your personal details and start journey with us</p>
-                <button class="ghost" id="signUp">Sign Up</button>
+                <a href="register" class="signup-btn">Sign Up</a>
             </div>
         </div>
     </div>
@@ -276,10 +289,36 @@
         <a target="_blank" href="https://www.florin-pop.com/blog/2019/03/double-slider-sign-in-up-form/">here</a>.
     </p>
 </footer>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    document.getElementById("signUp").addEventListener("click", function() {
-        window.location.href = "/register";
+    $(document).ready(function() {
+        $("form").submit(function(event) {
+            event.preventDefault();
+            var formData = $(this).serialize();
+
+            $.ajax({
+                type: "POST",
+                url: "/loginUser",
+                data: formData,
+                success: function(response) {
+                    if (response === "index") {
+                        window.location.href = "index";
+                    } else {
+                        $(".error-message").html("<h3 style='color:red;'>" + "Noooo corect data" + "</h3>");
+
+                    }
+                },
+                error: function(xhr) {
+                    var errorResponse = JSON.parse(xhr.responseText);
+                    $(".error-message").html("<h3 style='color:red;'>" + errorResponse + "</h3>");
+
+                }
+            });
+        });
     });
 </script>
-</body>
+
+
 </html>
