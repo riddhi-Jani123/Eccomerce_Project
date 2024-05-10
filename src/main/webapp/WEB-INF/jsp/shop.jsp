@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -105,7 +106,7 @@
                 <c:forEach var="products" items="${productList}" >
                   <div class="product-item col-lg-4 col-md-6 col-sm-6">
                     <div class="image-holder">
-                      <img src="/images/selling-products1.jpg" alt="Books" class="product-image">
+                      <img src="data:image/jpg;base64,${products.image}" class="product-image" alt="product" width="300px" height="350px"/>
                     </div>
                     <div class="cart-concern">
                       <div class="cart-button d-flex justify-content-between align-items-center">
@@ -878,17 +879,6 @@
   </div>
 </section>
 
-<section id="brand-collection" class="padding-medium bg-light-grey">
-  <div class="container">
-    <div class="d-flex flex-wrap justify-content-between">
-      <img src="/images/brand1.png" alt="phone" class="brand-image">
-      <img src="/images/brand2.png" alt="phone" class="brand-image">
-      <img src="/images/brand3.png" alt="phone" class="brand-image">
-      <img src="/images/brand4.png" alt="phone" class="brand-image">
-      <img src="/images/brand5.png" alt="phone" class="brand-image">
-    </div>
-  </div>
-</section>
 
 <section id="instagram" class="padding-large">
   <div class="container">

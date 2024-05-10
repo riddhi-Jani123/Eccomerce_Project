@@ -46,26 +46,26 @@ public class LoginController {
         return "setPassword";
     }
 
-//    @PostMapping("/loginUser")
-//    public ResponseEntity<?> loginUser(@ModelAttribute UserDTO userDTO){
-//        User user = userService.getByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword());
-//        if (user != null) {
-//            return ResponseEntity.ok().build();
-//        }
-//        return ResponseEntity.badRequest().body("{\"errorMessage\": \"Please enter correct email and password\"}");
-//    }
-
     @PostMapping("/loginUser")
-    public String loginUser(@ModelAttribute UserDTO userDTO, Model model){
+    public ResponseEntity<?> loginUser(@ModelAttribute UserDTO userDTO){
         User user = userService.getByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword());
         if (user != null) {
-            return ("index");
-        }else {
-            String error = "Please enter correct email and password";
-            model.addAttribute("errorMessage", error);
-            return "error";
+            return ResponseEntity.ok().build();
         }
+        return ResponseEntity.badRequest().body("{\"errorMessage\": \"Please enter correct email and password\"}");
     }
+
+//    @PostMapping("/loginUser")
+//    public String loginUser(@ModelAttribute UserDTO userDTO, Model model){
+//        User user = userService.getByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword());
+//        if (user != null) {
+//            return ("index");
+//        }else {
+//            String error = "Please enter correct email and password";
+//            model.addAttribute("errorMessage", error);
+//            return "error";
+//        }
+//    }
 
     @PostMapping("/registerUser")
     public String registerUser(@ModelAttribute UserDTO userDTO, Model model){

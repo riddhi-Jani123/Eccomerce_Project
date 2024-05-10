@@ -19,11 +19,12 @@ public class ProductImage {
         @Column(name = "product_image_id")
         private long productImageId;
 
-        @ManyToOne
+        @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "product_id")
         private Product product;
 
         @Column(name = "image", length = 200)
+        @Lob
         private byte[] image;
 
         @Column(name = "created_at")

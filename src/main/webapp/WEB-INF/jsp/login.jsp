@@ -303,16 +303,11 @@
                 url: "/loginUser",
                 data: formData,
                 success: function(response) {
-                    if (response === "index") {
                         window.location.href = "index";
-                    } else {
-                        $(".error-message").html("<h3 style='color:red;'>" + "Noooo corect data" + "</h3>");
-
-                    }
                 },
                 error: function(xhr) {
                     var errorResponse = JSON.parse(xhr.responseText);
-                    $(".error-message").html("<h3 style='color:red;'>" + errorResponse + "</h3>");
+                    $(".error-message").html("<h3 style='color:red;'>" + errorResponse.errorMessage + "</h3>");
 
                 }
             });

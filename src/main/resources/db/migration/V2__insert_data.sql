@@ -39,3 +39,63 @@ VALUES ('Puma Future Rider Twofold', 'Puma Future Rider Twofold is a retro-style
 
 INSERT INTO product (name, description, price, quantity, discount, brand_id)
 VALUES ('Puma Essentials Fleece Joggers', 'Puma Essentials Fleece Joggers are soft and comfortable joggers for lounging.', 45.00, 90, 0.0, 4);
+
+
+-- Insert products associated with Lululemon
+INSERT INTO product (name, description, price, quantity, discount, brand_id)
+VALUES ('Lululemon Align Pant II', 'Lululemon Align Pant II is a high-rise, versatile yoga pant made with Nulu™ fabric.', 98.00, 120, 0.0, 5);
+
+INSERT INTO product (name, description, price, quantity, discount, brand_id)
+VALUES ('Lululemon Define Jacket', 'Lululemon Define Jacket is a lightweight, sweat-wicking jacket perfect for warm-ups and cool-downs.', 118.00, 80, 0.0, 5);
+
+-- Insert products associated with The North Face
+INSERT INTO product (name, description, price, quantity, discount, brand_id)
+VALUES ('The North Face Venture 2 Jacket', 'The North Face Venture 2 Jacket is a waterproof, breathable jacket designed for outdoor adventures.', 99.00, 150, 0.0, 6);
+
+INSERT INTO product (name, description, price, quantity, discount, brand_id)
+VALUES ('The North Face Thermoball Eco Jacket', 'The North Face Thermoball Eco Jacket is a lightweight, packable jacket insulated with eco-friendly materials.', 199.00, 80, 0.0, 6);
+
+-- Insert products associated with Levi Strauss & Co.
+INSERT INTO product (name, description, price, quantity, discount, brand_id)
+VALUES ('Levi''s 501 Original Fit Jeans', 'Levi''s 501 Original Fit Jeans are classic straight-leg jeans with a button fly.', 69.50, 120, 0.0, 7);
+
+INSERT INTO product (name, description, price, quantity, discount, brand_id)
+VALUES ('Levi''s Sherpa Trucker Jacket', 'Levi''s Sherpa Trucker Jacket is a warm and stylish denim jacket lined with sherpa.', 98.00, 80, 0.0, 7);
+
+-- Insert products associated with H&M
+INSERT INTO product (name, description, price, quantity, discount, brand_id)
+VALUES ('H&M Slim Fit Chinos', 'H&M Slim Fit Chinos are versatile trousers with a slim silhouette.', 29.99, 150, 0.0, 8);
+
+INSERT INTO product (name, description, price, quantity, discount, brand_id)
+VALUES ('H&M Oversized Hoodie', 'H&M Oversized Hoodie is a cozy and stylish hoodie with an oversized fit.', 39.99, 100, 0.0, 8);
+
+-- Insert products associated with Zara
+INSERT INTO product (name, description, price, quantity, discount, brand_id)
+VALUES ('Zara Basic T-Shirt', 'Zara Basic T-Shirt is a soft and comfortable essential for everyday wear.', 12.99, 200, 0.0, 9);
+
+INSERT INTO product (name, description, price, quantity, discount, brand_id)
+VALUES ('Zara High Waisted Jeans', 'Zara High Waisted Jeans are trendy jeans designed to flatter your figure.', 49.99, 120, 0.0, 9);
+
+
+INSERT INTO e_commerce.product_image (product_id, image) VALUES
+ (4, LOAD_FILE('/var/lib/mysql-files/Adidas Essentials Hoodie.jpeg')),
+ (3, LOAD_FILE('/var/lib/mysql-files/Adidas Ultraboost.jpeg')),
+ (1, LOAD_FILE('/var/lib/mysql-files/Nike-270.jpeg')),
+ (2, LOAD_FILE('/var/lib/mysql-files/Nike Dri-FIT T-Shirt.png')),
+ (8, LOAD_FILE('/var/lib/mysql-files/Puma Essentials Fleece Joggers.jpeg')),
+ (7, LOAD_FILE('/var/lib/mysql-files/Puma Future Rider Twofold.jpeg')),
+ (6, LOAD_FILE('/var/lib/mysql-files/Under Armour Charged Assert 9.jpeg')),
+ (5, LOAD_FILE('/var/lib/mysql-files/Under Armour Tech 2.0 Shorts.jpeg')),
+ (9, LOAD_FILE('/var/lib/mysql-files/Lululemon Align Pant II.jpeg')),
+ (10, LOAD_FILE('/var/lib/mysql-files/Lululemon Define Jacket.jpeg')),
+ (11, LOAD_FILE('/var/lib/mysql-files/The North Face Venture 2 Jacket.jpeg')),
+ (12, LOAD_FILE('/var/lib/mysql-files/The North Face Thermoball Eco Jacket.jpeg')),
+ (13, LOAD_FILE('/var/lib/mysql-files/Levis 501 Original Fit Jeans.jpeg')),
+ (14, LOAD_FILE('/var/lib/mysql-files/Levis Sherpa Trucker Jacket.jpeg')),
+ (15, LOAD_FILE('/var/lib/mysql-files/H&M Slim Fit Chinos.jpeg')),
+ (16, LOAD_FILE('/var/lib/mysql-files/H&M Oversized Hoodie.jpeg')),
+ (17, LOAD_FILE('/var/lib/mysql-files/Zara Basic T-Shirt.jpeg')),
+ (18, LOAD_FILE('/var/lib/mysql-files/Zara High Waisted Jeans.jpeg'));
+
+
+
