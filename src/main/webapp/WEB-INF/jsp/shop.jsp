@@ -123,6 +123,8 @@
                       </div>
                     </div>
                     <div class="product-detail">
+                    <input type="hidden" name="productId" value="${products.productId}" />
+                    <input type="hidden" name="brandId" value="${products.brand.brandId}" />
                       <h3 class="product-title">
                         <a href="single-product.html">${products.name}</a>
                       </h3>
@@ -788,13 +790,12 @@
               </form>
             </div>
           </div>
-
-
           <div class="widgets widget-product-brands">
             <h5 class="widget-title">Brands</h5>
             <ul class="product-tags sidebar-list list-unstyled">
               <c:forEach var="brand" items="${brandsList}" >
                 <li class="tags-item">
+                <input type="hidden" name="brandId" id="brandId" value="${brand.brandId}" />
                   <a href="/products/">${brand.name}</a>
                 </li>
               </c:forEach>
@@ -932,5 +933,32 @@
 <script src="/js/jquery-1.11.0.min.js"></script>
 <script src="/js/plugins.js"></script>
 <script src="/js/script.js"></script>
+<script>
+$(document).ready(function() {
+ $(".product-item").show();
+  // Add click event listener to each brand link
+  $(".product-tags .tags-item a").click(function(event) {
+       event.preventDefault(); // Prevent the default link behavior
+       var tagsItem = $(this).closest('.tags-item');
+       var brandIdInput = tagsItem.find('input[name="brandId"]');
+       var brandId = brandIdInput.val();
+       console.log("brandId ",brandId);
+   if (brandId !== "") {
+         $(".product-item").each(function() {
+           var productBrandId = $(this).find('input[name="brandId"]').val();
+           console.log("productBrandId ",productBrandId);
+           if (productBrandId !== brandId) {
+             $(this).hide();
+           } else {
+             $(this).show();
+           }
+         });
+       } else {
+         $(".product-item").show();
+       }
+  });
+});
+
+</script>
 </body>
 </html>

@@ -6,8 +6,8 @@ import com.inexture.ecommerce.service.EmailService;
 import com.inexture.ecommerce.service.UserServiceImpl;
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +34,10 @@ public class LoginController {
         return "login";
     }
 
+    @GetMapping("/profile")
+    public String profile(){
+        return "profile";
+    }
 
 
     @GetMapping("/register")
@@ -47,9 +51,11 @@ public class LoginController {
     }
 
     @PostMapping("/loginUser")
-    public ResponseEntity<?> loginUser(@ModelAttribute UserDTO userDTO){
+    public ResponseEntity<?> loginUser(@ModelAttribute UserDTO userDTO, HttpServletRequest httpServletRequest){
         User user = userService.getByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword());
         if (user != null) {
+            HttpSession session = httpServletRequest.getSession();
+            session.setAttribute("user", user);
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().body("{\"errorMessage\": \"Please enter correct email and password\"}");
@@ -68,7 +74,7 @@ public class LoginController {
 //    }
 
     @PostMapping("/registerUser")
-    public String registerUser(@ModelAttribute UserDTO userDTO, Model model){
+    public String registerUser(@ModelAttribute UserDTO userDTO, Model model, HttpServletRequest httpServletRequest){
         User user = userService.getByEmail(userDTO.getEmail());
         if (user!=null) {
             model.addAttribute("emailAlreadyExist","email already exist");
@@ -85,6 +91,7 @@ public class LoginController {
         } catch (IOException | MessagingException e) {
             throw new RuntimeException(e);
         }
+        httpServletRequest.getSession().setAttribute("user",userDTO);
         return "index";
 
     }
@@ -94,6 +101,15 @@ public class LoginController {
         UserDTO userDTO = (UserDTO) httpServletRequest.getSession().getAttribute("user");
         userDTO.setPassword(password);
         userService.addUser(userDTO);
+        return "index";
+    }
+
+    @GetMapping("/signout")
+    public String signout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
         return "index";
     }
 }

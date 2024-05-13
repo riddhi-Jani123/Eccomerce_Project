@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <body>
 <header id="header">
@@ -15,9 +16,18 @@
                     <div class="col-md-4 col-sm-12 user-items">
                         <ul class="d-flex justify-content-end list-unstyled">
                             <li>
-                                <a href="login">
-                                    <i class="icon icon-user"></i>
-                                </a>
+                                <c:choose>
+                                    <c:when test="${not empty sessionScope.user}">
+                                        <a href="profile">
+                                            <i class="icon icon-user"></i>
+                                        </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="login">
+                                            <i class="icon icon-user"></i>
+                                        </a>
+                                    </c:otherwise>
+                                </c:choose>
                             </li>
                             <li>
                                 <a href="cart">
@@ -32,6 +42,11 @@
                             <li class="user-items search-item pe-3">
                                 <a href="#" class="search-button">
                                     <i class="icon icon-search"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="signout">
+                                   <i class="fa fa-sign-out"></i>
                                 </a>
                             </li>
                         </ul>

@@ -98,6 +98,11 @@
             color: #3c97bf;
             text-decoration: none;
         }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 20px;
+        }
 
     </style>
 
@@ -106,11 +111,12 @@
 
 <div class="container" id="container">
     <div class="form-container">
-        <form action="setPassword" method="post">
+        <form action="setPassword" method="post" onsubmit="return validateForm()">
             <h1>Set Password</h1>
             <input type="password" id="password" name="password" placeholder="Password" required />
-            <input type="password" id="confirmPassword" name="confirmPassword"  placeholder="Confirm Password" />
+            <input type="password" id="confirmPassword" name="confirmPassword"  placeholder="Confirm Password" required />
             <button type="submit">Set Password</button>
+            <span id="errorMessage" class="error-message"></span>
         </form>
     </div>
 </div>
@@ -123,7 +129,22 @@
         <a target="_blank" href="https://www.florin-pop.com/blog/2019/03/double-slider-sign-in-up-form/">here</a>.
     </p>
 </footer>
-
+<script>
+    function validateForm() {
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
+        var errorMessage = document.getElementById("errorMessage");
+        if (password.length < 8) {
+           errorMessage.textContent = "Password must be at least 8 characters long";
+           return false;
+        }
+        if (password !== confirmPassword) {
+           errorMessage.textContent = "Password and Confirm Password must match";
+           return false;
+        }
+        return true;
+    }
+</script>
 
 </body>
 </html>
