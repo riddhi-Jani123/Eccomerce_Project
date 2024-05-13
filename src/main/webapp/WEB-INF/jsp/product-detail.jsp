@@ -1,7 +1,14 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-<style>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/icomoon/icomoon.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" type="text/css" media="all" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
 
     html, body {
         height: 100%;
@@ -9,6 +16,34 @@
         margin: 0;
         font-family: 'Roboto', sans-serif;
     }
+    .product-quantity {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .product-quantity label {
+        margin-right: 10px;
+        font-size: 16px;
+        color: #43474D;
+    }
+
+    .quantity-input {
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+
+    .quantity-input input[type="number"] {
+        padding: 8px;
+        width: 60px; /* Adjust the width as needed */
+        border: none;
+        font-size: 16px;
+        color: #333;
+        outline: none;
+    }
+
+
     .product-description {
         margin-bottom: 20px;
     }
@@ -31,6 +66,7 @@
     .product-price {
         display: flex;
         align-items: center;
+        margin-bottom: 20px;
     }
 
     .product-price span {
@@ -58,24 +94,41 @@
         transition: all .5s;
     }
 
+
+    .cart-btn i, .buy-now-btn i {
+        color: #333; /* Icon color */
+        font-size: 18px; /* Adjust icon size as needed */
+    }
+
+    .cart-btn:hover, .buy-now-btn:hover {
+        background-color: rgba(0, 0, 0, 0.1); /* Light gray background color on hover */
+    }
+
     .cart-btn:hover,
     .buy-now-btn:hover {
         background-color: #64af3d;
     }
-
-
-    .wishlist a:hover {
-        color: #ff4d4d; /* Adjust hover color as needed */
-    }
-
-
     .wishlist {
         display: inline-block;
-        margin-right: 10px;
+        position: relative; /* Position the container relative to its normal position */
     }
 
     .wishlist a {
-        color: #ccc; /* Adjust color as needed */
+        display: block;
+        width: 30px; /* Adjust width as needed */
+        height: 30px; /* Adjust height as needed */
+        line-height: 30px; /* Center the heart icon vertically */
+        text-align: center; /* Center the heart icon horizontally */
+        border-radius: 50%; /* Ensure the container is a circle */
+        background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white background */
+    }
+
+    .wishlist i {
+        color: lightblue; /* Heart icon color */
+        font-size: 24px; /* Adjust icon size as needed */
+    }
+    .wishlist i:hover{
+        color: red;
     }
 
     /* Size Selection */
@@ -250,17 +303,9 @@
         opacity: 0.5;
         margin-right: 5px;
     }
-    .product-price {
-        display: flex;
-        align-items: center;
-    }
 
-    .product-price span {
-        font-size: 26px;
-        font-weight: 300;
-        color: #43474D;
-        margin-right: 20px;
-    }
+
+
 
     .cart-btn {
         display: inline-block;
@@ -301,9 +346,9 @@
             top: -85px;
         }
     }
-
-
 </style>
+</head>
+<body>
 <main class="container">
 
     <!-- Left Column / Headphones Image -->
@@ -319,7 +364,13 @@
 
         <!-- Product Description -->
         <div class="product-description">
-            <span class="product-name">Headphones <a href="#" class="wishlist"><i class="fas fa-heart"></i></a></span>
+            <h1 class="product-name">Headphones
+                <div class="wishlist">
+                    <a href="#"><i class="fas fa-heart"></i></a>
+                </div>
+
+            </h1>
+
 
             <h4>Beats EP</h4>
             <p>The preferred choice of a vast range of acclaimed DJs. Punchy, bass-focused sound and high isolation. Sturdy headband and on-ear cushions suitable for live performance</p>
@@ -348,6 +399,20 @@
                 </div>
 
             </div>
+
+<%--            <!-- Quantity Selection -->--%>
+<%--            <div class="quantity-select">--%>
+<%--                <label for="quantity">Quantity</label>--%>
+<%--                <input type="number" id="quantity" name="quantity" min="1" value="1">--%>
+<%--            </div>--%>
+
+            <div class="product-quantity">
+                <label for="quantity">Quantity</label>
+                <div class="quantity-input">
+                    <input type="number" id="quantity" name="quantity" value="1" min="1">
+                </div>
+            </div>
+
 
             <!-- Size Selection -->
             <div class="product-size">
@@ -380,12 +445,15 @@
                 <span class="price-value">148$</span>
             </div>
             <div class="button-group">
-                <a href="#" class="cart-btn">Add to Cart</a>
-                <a href="#" class="buy-now-btn">Buy Now</a>
+                <a href="#" class="cart-btn">Add to Cart &nbsp;&nbsp<i class="fas fa-shopping-cart"></i></a>
+                <a href="#" class="buy-now-btn">Buy Now &nbsp;&nbsp;<i class="fas fa-credit-card"></i></a>
             </div>
     </div>
     </div>
 </main>
+
+<jsp:include page="footer.jsp" />
+</body>
 <script>
     $(document).ready(function() {
 
