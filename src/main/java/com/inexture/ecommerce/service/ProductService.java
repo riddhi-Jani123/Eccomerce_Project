@@ -8,6 +8,6 @@ import java.util.List;
 public interface ProductService {
 
     public List<Product> findAll();
-
     public List<ProductDTO> findAllProductsWithImages();
+    public ProductDTO findById(Long id);
 }

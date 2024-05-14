@@ -3,7 +3,7 @@ package com.inexture.ecommerce.controller;
 import com.inexture.ecommerce.dto.UserDTO;
 import com.inexture.ecommerce.model.User;
 import com.inexture.ecommerce.service.EmailService;
-import com.inexture.ecommerce.service.UserServiceImpl;
+import com.inexture.ecommerce.service.impl.UserServiceImpl;
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;

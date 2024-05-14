@@ -1,8 +1,9 @@
-package com.inexture.ecommerce.service;
+package com.inexture.ecommerce.service.impl;
 
 import com.inexture.ecommerce.dto.UserDTO;
 import com.inexture.ecommerce.model.User;
 import com.inexture.ecommerce.repository.UserRepository;
+import com.inexture.ecommerce.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -179,7 +179,7 @@
         margin-top: 60px;
     }
     .left-column img {
-        width: 100%;
+        width: 80%;
         position: absolute;
         left: 0;
         top: 0;
@@ -349,13 +349,14 @@
 </style>
 </head>
 <body>
+
 <main class="container">
 
     <!-- Left Column / Headphones Image -->
     <div class="left-column">
         <img data-image="black" src="images/black.png" alt="">
         <img data-image="blue" src="images/blue.png" alt="">
-        <img data-image="red" class="active" src="images/red.png" alt="">
+        <img data-image="red" class="active" src="data:image/jpg;base64,${product.image}" alt="">
     </div>
 
 
@@ -364,16 +365,10 @@
 
         <!-- Product Description -->
         <div class="product-description">
-            <h1 class="product-name">Headphones
-                <div class="wishlist">
-                    <a href="#"><i class="fas fa-heart"></i></a>
-                </div>
+            <span class="product-name">${product.name} <a href="#" class="wishlist"><i class="fas fa-heart"></i></a></span>
 
-            </h1>
-
-
-            <h4>Beats EP</h4>
-            <p>The preferred choice of a vast range of acclaimed DJs. Punchy, bass-focused sound and high isolation. Sturdy headband and on-ear cushions suitable for live performance</p>
+            <h4>${brand.name}</h4>
+            <p>${product.description}</p>
         </div>
 
         <!-- Product Configuration -->
@@ -399,12 +394,6 @@
                 </div>
 
             </div>
-
-<%--            <!-- Quantity Selection -->--%>
-<%--            <div class="quantity-select">--%>
-<%--                <label for="quantity">Quantity</label>--%>
-<%--                <input type="number" id="quantity" name="quantity" min="1" value="1">--%>
-<%--            </div>--%>
 
             <div class="product-quantity">
                 <label for="quantity">Quantity</label>
@@ -442,7 +431,7 @@
             <!-- Product Pricing -->
             <div class="product-price">
                 <span class="price-label">Price:</span>
-                <span class="price-value">148$</span>
+                <span class="price-value">$${product.price}</span>
             </div>
             <div class="button-group">
                 <a href="#" class="cart-btn">Add to Cart &nbsp;&nbsp<i class="fas fa-shopping-cart"></i></a>
@@ -454,6 +443,7 @@
 
 <jsp:include page="footer.jsp" />
 </body>
+
 <script>
     $(document).ready(function() {
 
@@ -464,6 +454,14 @@
             $('.left-column img[data-image = ' + headphonesColor + ']').addClass('active');
             $(this).addClass('active');
         });
+
+         $('.cart-btn').on('click', function() {
+                    var headphonesColor = $(this).attr('data-image');
+
+                    var quantity = $('#quantity').val();
+                       window.location.href = '/add-to-cart?quantity=' + quantity;
+                });
+
 
     });
 </script>

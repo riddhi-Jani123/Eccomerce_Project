@@ -113,7 +113,8 @@
                         <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
                         </button>
                         <button type="button" class="view-btn tooltip
-                              d-flex">
+                              d-flex" data-product-id="${products.productId}"
+                             >
                           <i class="icon icon-screen-full"></i>
                           <span class="tooltip-text">Quick view</span>
                         </button>
@@ -935,6 +936,15 @@
 <script src="/js/script.js"></script>
 <script>
 $(document).ready(function() {
+$('.tooltip').click(function() {
+        // Get the product ID from the hidden input field
+         var productId = $(this).data('product-id');
+        console.log("productId ",productId)
+
+        // Redirect the user to the product detail page
+        window.location.href = '/product-detail?productId=' + productId;
+  });
+
  $(".product-item").show();
   // Add click event listener to each brand link
   $(".product-tags .tags-item a").click(function(event) {

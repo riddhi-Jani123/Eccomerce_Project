@@ -1,6 +1,6 @@
 package com.inexture.ecommerce.config;
 
-import com.inexture.ecommerce.service.UserServiceImpl;
+import com.inexture.ecommerce.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

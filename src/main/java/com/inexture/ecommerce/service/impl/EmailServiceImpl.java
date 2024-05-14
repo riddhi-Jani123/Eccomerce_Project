@@ -1,5 +1,6 @@
-package com.inexture.ecommerce.service;
+package com.inexture.ecommerce.service.impl;
 
+import com.inexture.ecommerce.service.EmailService;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.io.*;
 
 @Service
-public class EmailServiceImpl implements EmailService{
+public class EmailServiceImpl implements EmailService {
 
 
     @Autowired
